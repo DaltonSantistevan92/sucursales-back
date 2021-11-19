@@ -10,5 +10,5 @@ class Persona extends Model
     use HasFactory;
 
     protected $table = "personas";
-    protected $filleable = ["cedula", "nombres", "apellidos", "telefono", "correo", "direccion", "estado"];
+    protected $filleable = ["cedula", "nombres", "apellidos", "telefono", "direccion", "estado"];
 }

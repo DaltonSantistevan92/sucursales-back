@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 //Rutas de personas
 Route::get('personas',[PersonaController::class, 'getPersons']);
+
+//Routes of users
+Route::post('user/login', [UsuarioController::class, 'login']);
