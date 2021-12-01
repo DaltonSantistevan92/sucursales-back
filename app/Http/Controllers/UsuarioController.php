@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
-class UsuarioController extends Controller
-{
+class UsuarioController extends Controller{
+
     public function login(Request $request){
         $usuarioData = (object)$request->usuario;
         $response = [];
@@ -15,10 +17,18 @@ class UsuarioController extends Controller
             $usuario = Usuario::where('email', $usuarioData->email)->first();
 
             if($usuario){
-                if($usuario->password == $usuarioData->password){
+                // $encriptado =  Hash::make($usuarioData->password);
+
+                if (Hash::check($usuarioData->password, $usuario->password)) {
                     $response = [
                         'status' => true,
                         'message' => 'Access the system',
+                        'data' => $usuario
+                    ];
+                }else{
+                    $response = [
+                        'status' => false,
+                        'message' => 'Password incorrect',
                         'data' => $usuario
                     ];
                 }

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\PersonaController;
-use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,10 @@ Route::get('personas',[PersonaController::class, 'getPersons']);
 
 //Routes of users
 Route::post('user/login', [UsuarioController::class, 'login']);
+
+//Routes for menus
+Route::get('menu/{rol_id}/{parte}', [MenuController::class, 'get']);
+
+//Route example
+Route::post('example/conection', [MenuController::class, 'example']);
+
