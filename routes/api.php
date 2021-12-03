@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GeneralController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonaController;
@@ -31,6 +32,9 @@ Route::post('user/login', [UsuarioController::class, 'login']);
 //Routes for menus
 Route::get('menu/{rol_id}/{parte}', [MenuController::class, 'get']);
 
-//Route example
-Route::post('example/conection', [MenuController::class, 'example']);
-
+//Route para tipos Negocios, Provincia
+Route::get('tipo-negocio', [GeneralController::class, 'getTiposNegocios']);
+Route::get('provincia', [GeneralController::class, 'getProvincias']);
+Route::get('seccion', [GeneralController::class, 'getSecciones']);
+Route::get('horario', [GeneralController::class, 'getHorarios']);
+Route::get('ciudad/{provincia_id}', [GeneralController::class, 'getCiudades']);

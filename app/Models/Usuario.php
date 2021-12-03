@@ -14,4 +14,8 @@ class Usuario extends Model
     protected $filleable = [
         'person_id', 'rol_id', 'email', 'email_verified_at', 'password', 'estado'
     ];
+
+    public function empleo(){
+        return $this->hasMany(empleo::class);
+    }
 }

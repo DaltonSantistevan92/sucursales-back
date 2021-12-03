@@ -11,4 +11,11 @@ class Persona extends Model
 
     protected $table = "personas";
     protected $filleable = ["cedula", "nombres", "apellidos", "telefono", "direccion", "estado"];
+
+    public function persona(){
+        return $this->belongsTo(Persona::class);
+    }
+
+
 }
+
