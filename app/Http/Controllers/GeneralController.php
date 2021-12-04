@@ -6,6 +6,7 @@ use App\Models\Ciudad;
 use App\Models\Horario;
 use App\Models\Provincia;
 use App\Models\Seccion;
+use App\Models\TipoEmpleo;
 use App\Models\TipoNegocio;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,17 @@ class GeneralController extends Controller{
 
         if($horarios->count()){
             $response = $horarios;
+        }
+
+        return response()->json($response);
+    }
+
+    public function getTipoEmpleado(){
+        $tipos = TipoEmpleo::where('estado', 'A')->orderBy('tipo', 'asc')->get();
+        $response = [];
+
+        if($tipos->count() > 0){
+            $response = $tipos;
         }
 
         return response()->json($response);

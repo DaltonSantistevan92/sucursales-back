@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Faker\Provider\ar_JO\Person;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +13,7 @@ class Empleado extends Model{
 
     //Relacion
     public function persona(){
-        return $this->hasMany(Person::class);
+        return $this->belongsTo(Persona::class);
     }
 
     public function usuario(){

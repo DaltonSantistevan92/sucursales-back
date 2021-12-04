@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\GeneralController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NegocioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,10 @@ Route::get('provincia', [GeneralController::class, 'getProvincias']);
 Route::get('seccion', [GeneralController::class, 'getSecciones']);
 Route::get('horario', [GeneralController::class, 'getHorarios']);
 Route::get('ciudad/{provincia_id}', [GeneralController::class, 'getCiudades']);
+Route::get('tipo-empleo', [GeneralController::class, 'getTipoEmpleado']);
+
+//Rutas de empleados
+Route::get('empleado/{campo}/{valor}', [EmpleadoController::class, 'getEmpleadoByCampo']);
+
+//Rutas de negocio
+Route::post('negocio', [NegocioController::class, 'create']);

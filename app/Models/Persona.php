@@ -13,7 +13,7 @@ class Persona extends Model
     protected $filleable = ["cedula", "nombres", "apellidos", "telefono", "direccion", "estado"];
 
     public function persona(){
-        return $this->belongsTo(Persona::class);
+        return $this->hasMany(Persona::class);
     }
 
 
