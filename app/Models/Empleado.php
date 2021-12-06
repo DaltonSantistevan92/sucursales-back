@@ -16,11 +16,15 @@ class Empleado extends Model{
         return $this->belongsTo(Persona::class);
     }
 
-    public function usuario(){
-        return $this->hasMany(Usuario::class);
+    public function negocio(){
+        return $this->hasMany(Negocio::class);
     }
 
-    public function tipo_empleo(){
-        return $this->hasMany(TipoEmpleo::class);
-    }
+    // public function usuario(){
+    //     return $this->hasMany(Usuario::class);
+    // }
+
+    // public function tipo_empleo(){
+    //     return $this->hasMany(TipoEmpleo::class);
+    // }
 }

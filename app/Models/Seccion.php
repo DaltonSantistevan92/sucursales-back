@@ -9,4 +9,8 @@ class Seccion extends Model{
     use HasFactory;
 
     protected $table = "secciones";
+
+    public function negocio(){
+        return $this->hasMany(Negocio::class);
+    }
 }

@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Horario extends Model{
+
     use HasFactory;
     protected $table = "horarios";
+
+    public function negocio(){
+        return $this->hasMany(Negocio::class);
+    }
 }

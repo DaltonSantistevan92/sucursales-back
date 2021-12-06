@@ -9,4 +9,9 @@ class TipoNegocio extends Model{
 
     use HasFactory;
     protected $table = "tipo_negocio";
+
+    public function negocio(){
+        return $this->hasMany(Negocio::class);
+    }
+
 }

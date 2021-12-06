@@ -13,4 +13,31 @@ class Negocio extends Model{
                 "provincia_id", "ciudad_id", "horario_id", "foto", "ubicacion", "estado"];
 
 
+    public function tipoNegocio(){
+        return $this->belongsTo(TipoNegocio::class);
+    }
+
+    public function tipoEmpleo(){
+        return $this->belongsTo(TipoEmpleo::class);
+    }
+
+    public function empleado(){
+        return $this->belongsTo(Empleado::class);
+    }
+
+    public function seccion(){
+        return $this->belongsTo(Seccion::class);
+    }
+
+    public function provincia(){
+        return $this->belongsTo(Provincia::class);
+    }
+
+    public function ciudad(){
+        return $this->belongsTo(Ciudad::class);
+    }
+
+    public function horario(){
+        return $this->belongsTo(Horario::class);
+    }
 }

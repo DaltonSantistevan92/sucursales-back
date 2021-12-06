@@ -13,13 +13,21 @@ class NegocioController extends Controller{
 
         if($negocio){
             $existNegocio = Negocio::where('nombre', $negocio->nombre)->first();
+            $existEmpleado = Negocio::where('empleado_id', $negocio->empleado_id)->first();
 
             if($existNegocio){  //Existe negocio con ese nombre
                 $response = [
                     'estado' => false,
                     'mensaje' => 'Ya existe un negocio con ese nombre'
                 ];
-            }else{
+            }else
+            if($existEmpleado){
+                $response = [
+                    'estado' => false,
+                    'mensaje' => 'El empleado ya tiene asignado un negocio !!'
+                ];
+            }
+            else{
                 $new  = new Negocio();
                 $new->tipo_negocio_id = $negocio->tipo_negocio_id;
                 $new->tipo_empleo_id = $negocio->tipo_empleo_id;
@@ -43,6 +51,35 @@ class NegocioController extends Controller{
             $response = [
                 'estado' => false,
                 'mensaje' => 'No hay datos para procesar'
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+    public function get(){
+        $negocios = Negocio::where('estado', 'A')->orWhere('estado', 'I')->orderBy('nombre', 'asc')->get();
+        $response = [];
+
+        if($negocios->count() > 0){
+            foreach($negocios as $n){
+                $n->tipoNegocio;
+                $n->tipoEmpleo;
+                $n->empleado->persona;
+                $n->provincia;
+                $n->ciudad;
+                $n->horario;
+                $n->seccion;
+            }
+
+            $response = [
+                'cantidad' => $negocios->count(),
+                'data' => $negocios
+            ];
+        }else{
+            $response = [
+                'cantidad' => 0,
+                'data' => []
             ];
         }
 
