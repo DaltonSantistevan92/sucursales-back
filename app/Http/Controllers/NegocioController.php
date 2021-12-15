@@ -85,4 +85,52 @@ class NegocioController extends Controller{
 
         return response()->json($response);
     }
+
+    public function find($id){
+        $negocio = Negocio::find($id);
+
+        if($negocio){
+            $negocio->tipoNegocio;
+            $negocio->tipoEmpleo;
+            $negocio->empleado->persona;
+            $negocio->provincia;
+            $negocio->ciudad;
+            $negocio->horario;
+            $negocio->seccion;
+        }else{
+            $negocio = false;
+        }
+
+        return response()->json($negocio);
+    }
+
+    public function updateStatus(Request $request){
+        $negocioData = (object)$request->negocio;
+
+        $msj = '';
+        $negocio = Negocio::find($negocioData->id);
+        $negocio->estado = $negocioData->estado;
+        $negocio->save();
+
+        if($negocio->estado == 'A'){
+            $msj = 'El negocio está activo !!';
+            $estado = 'text-primary';
+        }else
+        if($negocio->estado == 'I'){
+            $msj = 'El negocio ahora se encuentra inactivo !!';
+            $estado = 'text-warning';
+        }else
+        if($negocio->estado = 'E'){
+            $msj = 'Se ha eliminado el negocio';
+            $estado = 'text-danger';
+        }
+
+        $response = [
+            'estado' => true,
+            'mensaje' => $msj,
+            'estado' => $estado
+        ];
+
+        return response()->json($response);
+    }
 }

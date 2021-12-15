@@ -48,3 +48,5 @@ Route::get('empleado/{campo}/{valor}', [EmpleadoController::class, 'getEmpleadoB
 //Rutas de negocio
 Route::post('negocio', [NegocioController::class, 'create']);
 Route::get('negocio', [NegocioController::class, 'get']);
+Route::get('negocio/{id}', [NegocioController::class, 'find']);
+Route::put('negocio/actualizar/estado', [NegocioController::class, 'updateStatus']);
