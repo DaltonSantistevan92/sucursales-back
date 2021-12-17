@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\GeneralController;
 use Illuminate\Http\Request;
@@ -8,7 +9,8 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NegocioController;
-
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -50,3 +52,16 @@ Route::post('negocio', [NegocioController::class, 'create']);
 Route::get('negocio', [NegocioController::class, 'get']);
 Route::get('negocio/{id}', [NegocioController::class, 'find']);
 Route::put('negocio/actualizar/estado', [NegocioController::class, 'updateStatus']);
+
+//Rutas de categorias
+Route::post('categoria', [CategoriaController::class, 'createCategory']);
+Route::get('categoria', [CategoriaController::class, 'get']);
+
+//Rutas de producto
+Route::post('producto', [ProductoController::class, 'createProduct']);
+Route::get('producto', [ProductoController::class, 'get']);
+
+
+//Ruta de proveedor
+Route::get('proveedor', [ProveedorController::class, 'get']);
+
