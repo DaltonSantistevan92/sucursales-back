@@ -32,6 +32,7 @@ Route::get('personas',[PersonaController::class, 'getPersons']);
 
 //Routes of users
 Route::post('user/login', [UsuarioController::class, 'login']);
+Route::post('user/save', [UsuarioController::class, 'saveUser']);
 
 //Routes for menus
 Route::get('menu/{rol_id}/{parte}', [MenuController::class, 'get']);
@@ -64,4 +65,7 @@ Route::get('producto', [ProductoController::class, 'get']);
 
 //Ruta de proveedor
 Route::get('proveedor', [ProveedorController::class, 'get']);
+Route::post('proveedor', [ProveedorController::class, 'createProveedor']);
+
+//Ruta del cliente 
 
