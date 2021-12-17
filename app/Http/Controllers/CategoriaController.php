@@ -6,18 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Categoria;
 
 
-class CategoriaController extends Controller
-{
-    //
+class CategoriaController extends Controller{
+
     public function createCategory(Request $request){
         $categoria = (object)$request->categoria;
 
         $detalle = ucfirst($categoria->detalle);
         $response = [];
 
-        if($categoria){          
+        if($categoria){
             $existeCategoria = Categoria::where('detalle', $detalle)->get()->first();
-            
+
             if($existeCategoria){
                 $response = [
                     'estado' => false,
@@ -26,6 +25,7 @@ class CategoriaController extends Controller
                 ];
             }else{
                 $nuevoCateroria = new Categoria();
+
                 $nuevoCateroria->detalle = $detalle;
                 $nuevoCateroria->estado = 'A';
 
@@ -41,8 +41,8 @@ class CategoriaController extends Controller
                         'mensaje' => 'La Categoria no se puede guardar',
                         'categoria' => null
                     ];
-                }   
-            }         
+                }
+            }
         }else{
             $response = [
                 'estado' => false,
@@ -54,23 +54,40 @@ class CategoriaController extends Controller
 
     }
 
-    public function get(){
-        $categorias = Categoria::where('estado', 'A')->orderBy('detalle')->get();
+    public function get($orden = 'asc'){
+        $categorias = Categoria::where('estado', 'A')->orderBy('detalle', $orden)->get();
         $response = [];
 
-        if (count($categorias) > 0) {
+        if ($categorias->count() > 0) {
             $response = [
                 'estado' => true,
                 'mensaje' => 'Existen datos',
-                'categoria' => $categorias
+                'categoria' => $categorias,
+                'cantidad' => $categorias->count()
             ];
         }else{
             $response = [
                 'estado' => false,
                 'mensaje' => 'No existen datos',
-                'categoria' => null
+                'categoria' => [],
+                'cantidad' => 0
             ];
         }
+
+        return response()->json($response);
+    }
+
+    public function delete(Request $request){
+        $cat = (object)$request->categoria;
+
+        $categoria = Categoria::find($cat->id);
+        $categoria->estado = $cat->estado;
+        $categoria->save();
+
+        $response = [
+            'estado' => true,
+            'mensajje' => 'Categoría eliminada'
+        ];
 
         return response()->json($response);
     }

@@ -55,12 +55,12 @@ Route::put('negocio/actualizar/estado', [NegocioController::class, 'updateStatus
 
 //Rutas de categorias
 Route::post('categoria', [CategoriaController::class, 'createCategory']);
-Route::get('categoria', [CategoriaController::class, 'get']);
+Route::get('categoria/{orden}', [CategoriaController::class, 'get']);
+Route::put('categoria/delete', [CategoriaController::class, 'delete']);
 
 //Rutas de producto
 Route::post('producto', [ProductoController::class, 'createProduct']);
 Route::get('producto', [ProductoController::class, 'get']);
-
 
 //Ruta de proveedor
 Route::get('proveedor', [ProveedorController::class, 'get']);
