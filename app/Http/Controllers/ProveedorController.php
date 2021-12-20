@@ -8,24 +8,42 @@ use Illuminate\Http\Request;
 class ProveedorController extends Controller
 {
     //
-    public function get(){
-        $proveedores = Proveedor::where('estado', 'A')->orderBy('razon_social')->get();
+    public function find($id){
+        $proveedor = Proveedor::find($id);
         $response = [];
 
-        if (count($proveedores) > 0) {
+        if($proveedor){
             $response = [
-                'estado' => true,
-                'mensaje' => 'Existen datos',
-                'proveedor' => $proveedores
+                'status' => true,
+                'mensaje' => 'si hay datos',
+                'proveedor' => $proveedor
             ];
         }else{
             $response = [
-                'estado' => false,
-                'mensaje' => 'No existen datos',
+                'status' => false,
+                'mensaje' => 'no hay datos',
                 'proveedor' => null
             ];
         }
+        return response()->json($response);
 
+    }
+
+    public function get(){
+        $proveedores = Proveedor::where('estado', 'A')->orWhere('estado', 'I')->orderBy('razon_social','asc')->get();
+        $response = [];
+
+        if ($proveedores->count() > 0) {
+            $response = [
+                'cantidad' => $proveedores->count(),
+                'data' => $proveedores
+            ];
+        }else{
+            $response = [
+                'cantidad' => 0,
+                'data' => []
+            ];
+        }
         return response()->json($response);
     }
 
@@ -53,15 +71,15 @@ class ProveedorController extends Controller
                     'mensaje' => 'El ruc del proveedor ya existe',
                     'proveedor' => null
                 ];
-            }
-            else{
+            }else{
                 $nuevoProveedor = new Proveedor();
-                $nuevoProveedor->ruc = $proveedor->ruc;
-                $nuevoProveedor->razon_social = $proveedor->razon_social;
+                $nuevoProveedor->ruc = $ruc;
+                $nuevoProveedor->razon_social = $razon_social;
                 $nuevoProveedor->email = $proveedor->email;
+                $nuevoProveedor->telefono = $proveedor->telefono;
+                $nuevoProveedor->telefono2 = $proveedor->telefono2;
                 $nuevoProveedor->direccion = $proveedor->direccion;
                 $nuevoProveedor->estado = 'A';
-                $nuevoProveedor->save();
 
                 if($nuevoProveedor->save()){
                     $response = [

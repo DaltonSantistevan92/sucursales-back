@@ -10,5 +10,5 @@ class Proveedor extends Model
     use HasFactory;
 
     protected $table = "proveedores";
-    protected $filleable = ['ruc','razon_social','email','telefono','direccion','estado'];
+    protected $filleable = ['ruc','razon_social','email','telefono','telefono2','direccion','estado'];
 }

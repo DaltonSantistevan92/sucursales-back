@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Producto_Negocio;
+
 class Negocio extends Model{
     use HasFactory;
 
@@ -39,5 +41,10 @@ class Negocio extends Model{
 
     public function horario(){
         return $this->belongsTo(Horario::class);
+    }
+
+    public function producto_negocio()
+    {
+        return $this->hasMany(Producto_Negocio::class);
     }
 }
