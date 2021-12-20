@@ -25,7 +25,6 @@ class CategoriaController extends Controller{
                 ];
             }else{
                 $nuevoCateroria = new Categoria();
-
                 $nuevoCateroria->detalle = $detalle;
                 $nuevoCateroria->estado = 'A';
 
