@@ -47,6 +47,24 @@ class ProveedorController extends Controller
         return response()->json($response);
     }
 
+    public function getByEstado($estado){
+        $proveedores = Proveedor::where('estado', $estado)->orderBy('razon_social','asc')->get();
+        $response = [];
+
+        if ($proveedores->count() > 0) {
+            $response = [
+                'cantidad' => $proveedores->count(),
+                'data' => $proveedores
+            ];
+        }else{
+            $response = [
+                'cantidad' => 0,
+                'data' => []
+            ];
+        }
+        return response()->json($response);
+    }
+
     public function createProveedor(Request $request){
         $proveedor = (object)$request->proveedor;
 

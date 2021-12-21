@@ -12,6 +12,7 @@ use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ToolController;
+use App\Models\Proveedor;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,14 +68,14 @@ Route::get('producto/{id}', [ProductoController::class, 'find']);
 Route::post('producto', [ProductoController::class, 'createProduct']);
 Route::put('producto/actualizar-estado', [ProductoController::class, 'updateStatus']); //editar
 
-
 //Ruta para traer imagenes
 Route::get('archivo/{folder}/{file}', [ToolController::class, 'viewImage']);
 
 //Ruta de proveedor
-Route::get('proveedor/{id}', [ProveedorController::class, 'find']);
 Route::get('proveedor', [ProveedorController::class, 'get']);
+Route::get('proveedor/{id}', [ProveedorController::class, 'find']);
+Route::get('proveedor/estado/{estado}', [ProveedorController::class, 'getByEstado']);
 Route::post('proveedor', [ProveedorController::class, 'createProveedor']);
 
-//Ruta del cliente 
+//Ruta del cliente
 
