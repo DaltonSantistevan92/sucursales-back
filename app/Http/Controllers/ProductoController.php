@@ -9,7 +9,7 @@ use App\Models\Producto;
 class ProductoController extends Controller
 {
     //
-    public function createProduct(Request $request){
+    public function create(Request $request){
         $producto = (object)$request->producto;
 
         $nombre = ucfirst($producto->nombre);
@@ -25,7 +25,7 @@ class ProductoController extends Controller
                     'mensaje' => 'El nombre del producto ya existe',
                     'producto' => null
                 ];
-            }else 
+            }else
             if($existeCodigo){
                 $response = [
                     'estado' => false,
@@ -34,6 +34,7 @@ class ProductoController extends Controller
                 ];
             }else{
                 $nuevoProducto = new Producto();
+
                 $nuevoProducto->proveedor_id = $producto->proveedor_id;
                 $nuevoProducto->categoria_id = $producto->categoria_id;
                 $nuevoProducto->nombre = $producto->nombre;
@@ -42,7 +43,7 @@ class ProductoController extends Controller
                 $nuevoProducto->precio_compra = 0.00;
                 $nuevoProducto->precio_venta = $producto->precio_venta;
                 $nuevoProducto->margen = $producto->precio_venta;
-                $nuevoProducto->fecha = $producto->fecha;
+                $nuevoProducto->fecha = date('Y-m-d');
                 $nuevoProducto->estado = 'A';
 
                 if($nuevoProducto->save()){

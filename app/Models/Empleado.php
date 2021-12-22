@@ -20,11 +20,11 @@ class Empleado extends Model{
         return $this->hasMany(Negocio::class);
     }
 
-    // public function usuario(){
-    //     return $this->hasMany(Usuario::class);
-    // }
+    public function usuario(){
+        return $this->belongsTo(Usuario::class, 'user_id', 'id');
+    }
 
-    // public function tipo_empleo(){
-    //     return $this->hasMany(TipoEmpleo::class);
-    // }
+    public function tipo_empleo(){
+        return $this->belongsTo(TipoEmpleo::class, 'tipo_empleado_id', 'id');
+    }
 }

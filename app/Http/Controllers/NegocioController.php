@@ -93,6 +93,8 @@ class NegocioController extends Controller{
             $negocio->tipoNegocio;
             $negocio->tipoEmpleo;
             $negocio->empleado->persona;
+            $negocio->empleado->usuario;
+            $negocio->empleado->tipo_empleo;
             $negocio->provincia;
             $negocio->ciudad;
             $negocio->horario;

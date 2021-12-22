@@ -76,29 +76,6 @@ class CategoriaController extends Controller{
         return response()->json($response);
     }
 
-    public function getByEstado($estado){
-        $categorias = Categoria::where('estado', $estado)->orderBy('detalle', 'asc')->get();
-        $response = [];
-
-        if ($categorias->count() > 0) {
-            $response = [
-                'estado' => true,
-                'mensaje' => 'Existen datos',
-                'categoria' => $categorias,
-                'cantidad' => $categorias->count()
-            ];
-        }else{
-            $response = [
-                'estado' => false,
-                'mensaje' => 'No existen datos',
-                'categoria' => [],
-                'cantidad' => 0
-            ];
-        }
-
-        return response()->json($response);
-    }
-
     public function delete(Request $request){
         $cat = (object)$request->categoria;
 
@@ -108,7 +85,7 @@ class CategoriaController extends Controller{
 
         $response = [
             'estado' => true,
-            'mensajje' => 'Categoría eliminada'
+            'mensaje' => 'Categoría eliminada'
         ];
 
         return response()->json($response);
