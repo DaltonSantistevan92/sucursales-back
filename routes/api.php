@@ -77,5 +77,6 @@ Route::get('proveedor/{id}', [ProveedorController::class, 'find']);
 Route::get('proveedor/estado/{estado}', [ProveedorController::class, 'getByEstado']);
 Route::post('proveedor', [ProveedorController::class, 'createProveedor']);
 
-//Ruta del cliente
+//Ruta para subir archivos
+Route::post('upload', [ToolController::class, 'uploadFile']);
 

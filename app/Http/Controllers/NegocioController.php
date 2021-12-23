@@ -66,6 +66,7 @@ class NegocioController extends Controller{
                 $n->tipoNegocio;
                 $n->tipoEmpleo;
                 $n->empleado->persona;
+                $n->empleado->usuario;
                 $n->provincia;
                 $n->ciudad;
                 $n->horario;
