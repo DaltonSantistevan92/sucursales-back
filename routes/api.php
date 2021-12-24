@@ -56,6 +56,8 @@ Route::post('negocio', [NegocioController::class, 'create']);
 Route::get('negocio', [NegocioController::class, 'get']);
 Route::get('negocio/{id}', [NegocioController::class, 'find']);
 Route::put('negocio/actualizar/estado', [NegocioController::class, 'updateStatus']);
+Route::post('negocio/productos', [NegocioController::class, 'addSucursalNegocio']);
+Route::get('negocio/productos/{id}', [NegocioController::class, 'viewNegocioProducto']);
 
 //Rutas de categorias
 Route::post('categoria', [CategoriaController::class, 'createCategory']);

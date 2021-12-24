@@ -13,7 +13,7 @@ class Producto_Negocio extends Model
     use HasFactory;
     protected $table = "producto_negocio";
     protected $filleable = ["producto_id","negocio_id","stock","stock_minimo","stock_maximo","estado"];
-    
+
     public function producto()
     {
         return $this->belongsTo(Producto::class);

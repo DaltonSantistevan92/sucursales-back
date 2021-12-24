@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Negocio;
+use App\Models\Producto_Negocio;
 use Illuminate\Http\Request;
 
 class NegocioController extends Controller{
@@ -135,5 +136,74 @@ class NegocioController extends Controller{
         ];
 
         return response()->json($response);
+    }
+
+    public function addSucursalNegocio(Request $request){
+
+        $negocio = (object)$request->negocio;
+        $productos = (array)$request->productos;
+        $response = [];
+
+        $mensajes = ""; $boolMensaje = false;
+
+        if(is_array($productos)){
+            //Recorrer el productos
+            for($i = 0; $i < count($productos); $i++){
+                $productos[$i] = (object)$productos[$i];
+            }
+
+            foreach($productos as $p){
+                $prodNegExist = Producto_Negocio::where('producto_id', $p->id)->where('negocio_id', $negocio->id)->first();
+
+                if($prodNegExist){
+                    $mensajes = $mensajes." Producto ".$p->nombre.' ya registrado.';
+                    $boolMensaje = true;
+                }else{
+                    $new = new Producto_Negocio();
+                    $new->producto_id = $p->id;
+                    $new->negocio_id = $negocio->id;
+                    $new->stock = 0;
+                    $new->stock_minimo = 0;
+                    $new->stock_maximo = 0;
+                    $new->estado = 'A';
+                    $new->save();
+                }
+            }
+
+            if($boolMensaje){
+                $response = [
+                    'estado' => true,
+                    'mensaje' => $mensajes,
+                    'factor' => 1
+                ];
+            }else{
+                $response = [
+                    'estado' => true,
+                    'mensaje' => 'Productos agregados',
+                    'factor' => 2
+                ];
+            }
+        }else{
+            $response = [
+                'estado' => false,
+                'mensaje' => 'No ha enviado productos',
+                'factor' => 0
+            ];
+        }
+        return response()->json($response);
+    }
+
+    public function viewNegocioProducto($id){
+
+        $response = [];
+        $negProd = Producto_Negocio::select('producto_id')->where('negocio_id', $id)->get();
+
+        if($negProd->count() > 0){
+            foreach($negProd as $p){
+                $p->producto->categoria;
+            }
+        }
+
+        return response()->json($negProd);
     }
 }
