@@ -146,4 +146,22 @@ class ProductoController extends Controller
 
         return response()->json($response);
     }
+
+    public function getProductoByCategoria($categoria_id, $estado){
+        $response = [];
+
+        if($categoria_id > 0 ){
+            //Traer los productos por su categoria
+            $productos = Producto::where('categoria_id', $categoria_id)->where('estado', $estado)->get();
+        }else{
+            //Traer todos los productos
+            $productos = Producto::where('estado', $estado)->get();
+        }
+
+        if($productos->count() > 0){
+            $response = $productos;
+        }
+
+        return response()->json($response);
+    }
 }

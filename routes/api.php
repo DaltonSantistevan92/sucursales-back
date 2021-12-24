@@ -65,6 +65,7 @@ Route::put('categoria/delete', [CategoriaController::class, 'delete']);
 //Rutas de producto
 Route::get('producto/{estado}', [ProductoController::class, 'get']);
 Route::get('producto/{id}', [ProductoController::class, 'find']);
+Route::get('producto/categoria/{categoria_id}/{estado}', [ProductoController::class, 'getProductoByCategoria']);
 Route::post('producto', [ProductoController::class, 'create']);
 Route::put('producto/actualizar-estado', [ProductoController::class, 'updateStatus']); //editar
 

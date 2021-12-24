@@ -12,7 +12,7 @@ class Negocio extends Model{
 
     protected $table = "negocios";
     protected $filleable = ["tipo_negocio_id", "tipo_empleo_id", "empleado_id", "seccion_id", "nombre",
-                "provincia_id", "ciudad_id", "horario_id", "foto", "ubicacion", "estado"];
+                "provincia_id", "ciudad_id", "horario_id", "foto", "ubicacion", "descripcion", "estado"];
 
 
     public function tipoNegocio(){
