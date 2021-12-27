@@ -88,6 +88,36 @@ class NegocioController extends Controller{
         return response()->json($response);
     }
 
+    public function getActivos($estado){
+        $negocios = Negocio::where('estado',$estado)->orderBy('nombre', 'asc')->get();
+        $response = [];
+
+        if($negocios->count() > 0){
+            foreach($negocios as $n){
+                $n->tipoNegocio;
+                $n->tipoEmpleo;
+                $n->empleado->persona;
+                $n->empleado->usuario;
+                $n->provincia;
+                $n->ciudad;
+                $n->horario;
+                $n->seccion;
+            }
+
+            $response = [
+                'cantidad' => $negocios->count(),
+                'data' => $negocios
+            ];
+        }else{
+            $response = [
+                'cantidad' => 0,
+                'data' => []
+            ];
+        }
+
+        return response()->json($response);
+    }
+
     public function find($id){
         $negocio = Negocio::find($id);
 
@@ -206,4 +236,6 @@ class NegocioController extends Controller{
 
         return response()->json($negProd);
     }
+
+    
 }
