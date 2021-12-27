@@ -5,14 +5,17 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\GeneralController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\Detalle_CompraController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\Producto_NegocioController;
 use App\Http\Controllers\ToolController;
-use App\Models\Proveedor;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +58,7 @@ Route::get('empleado/{campo}/{valor}', [EmpleadoController::class, 'getEmpleadoB
 Route::post('negocio', [NegocioController::class, 'create']);
 Route::get('negocio', [NegocioController::class, 'get']);
 Route::get('negocio/{id}', [NegocioController::class, 'find']);
+Route::get('negocio/estado/{estado}', [NegocioController::class, 'getActivos']);
 Route::put('negocio/actualizar/estado', [NegocioController::class, 'updateStatus']);
 Route::post('negocio/productos', [NegocioController::class, 'addSucursalNegocio']);
 Route::get('negocio/productos/{id}', [NegocioController::class, 'viewNegocioProducto']);
@@ -70,6 +74,16 @@ Route::get('producto/{id}', [ProductoController::class, 'find']);
 Route::get('producto/categoria/{categoria_id}/{estado}', [ProductoController::class, 'getProductoByCategoria']);
 Route::post('producto', [ProductoController::class, 'create']);
 Route::put('producto/actualizar-estado', [ProductoController::class, 'updateStatus']); //editar
+
+//Ruta Producto_Negocio
+Route::get('producto_negocio/{negocio_id}/{categoria_id}/{estado}',[Producto_NegocioController::class, 'getProductoByNegocio']);
+
+
+//Ruta de Compra
+Route::post('compra',[CompraController::class, 'create']);
+
+//Ruta de Detalle_Compra
+Route::post('detallecompra',[Detalle_CompraController::class, 'create']);
 
 //Ruta para traer imagenes
 Route::get('archivo/{folder}/{file}', [ToolController::class, 'viewImage']);

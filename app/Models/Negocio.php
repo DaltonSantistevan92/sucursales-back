@@ -47,4 +47,8 @@ class Negocio extends Model{
     {
         return $this->hasMany(Producto_Negocio::class);
     }
+
+    public function compra(){
+        return $this->hasMany(Compra::class);
+    }
 }

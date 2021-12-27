@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Persona;
 use App\Models\Rol;
+use App\Models\Compra;
+
 
 
 class Usuario extends Model
@@ -29,6 +31,10 @@ class Usuario extends Model
 
     public function rol(){
         return $this->belongsTo(Rol::class);
+    }
+
+    public function compra(){
+        return $this->hasMany(Compra::class);
     }
 
 }
