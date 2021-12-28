@@ -78,9 +78,10 @@ Route::put('producto/actualizar-estado', [ProductoController::class, 'updateStat
 //Ruta Producto_Negocio
 Route::get('producto_negocio/{negocio_id}/{categoria_id}/{estado}',[Producto_NegocioController::class, 'getProductoByNegocio']);
 
-
 //Ruta de Compra
 Route::post('compra',[CompraController::class, 'create']);
+Route::get('compra/cantidad/{negocio_id}/{year}/{month}', [CompraController::class, 'cantCompraEstado']);
+Route::get('compra/{negocio_id}/{status_id}/{year}/{month}', [CompraController::class, 'get']);
 
 //Ruta de Detalle_Compra
 Route::post('detallecompra',[Detalle_CompraController::class, 'create']);
@@ -96,4 +97,6 @@ Route::post('proveedor', [ProveedorController::class, 'createProveedor']);
 
 //Ruta para subir archivos
 Route::post('upload', [ToolController::class, 'uploadFile']);
+Route::get('year/{estado}', [ToolController::class, 'getYears']);
+Route::get('month', [ToolController::class, 'getMonths']);
 

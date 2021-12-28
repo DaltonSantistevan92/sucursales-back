@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
@@ -51,5 +52,61 @@ class ToolController extends Controller{
         }
 
         return response()->json($response);
+    }
+
+    public function getYears($estado){
+
+        $estado = strtoupper($estado);
+        $years = Year::where('estado', $estado)->get();
+        $response = [];
+
+        if($years->count() > 0)
+            $response = $years;
+
+        return response()->json($response);
+    }
+
+    public function getMonths(){
+        $meses = [
+            [
+                'value' => 1,
+                'mes' => 'Enero'
+            ],[
+                'value' => 2,
+                'mes' => 'Febrero'
+            ],[
+                'value' => 3,
+                'mes' => 'Marzo'
+            ],[
+                'value' => 4,
+                'mes' => 'Abril'
+            ],[
+                'value' => 5,
+                'mes' => 'Mayo'
+            ],[
+                'value' => 6,
+                'mes' => 'Junio'
+            ],[
+                'value' => 7,
+                'mes' => 'Julio'
+            ],[
+                'value' => 8,
+                'mes' => 'Agosto'
+            ],[
+                'value' => 9,
+                'mes' => 'Septimebre'
+            ],[
+                'value' => 10,
+                'mes' => 'Octubre'
+            ],[
+                'value' => 11,
+                'mes' => 'Noviembre'
+            ],[
+                'value' => 12,
+                'mes' => 'Diciembre'
+            ]
+        ];
+
+        return response()->json($meses);
     }
 }
