@@ -159,11 +159,15 @@ class ProductoController extends Controller
         }
 
         if($productos->count() > 0){
+            foreach($productos as $p){
+                $p->categoria;
+                $p->proveedor;
+            }
+
             $response = $productos;
         }
 
-        return response()->json($response); 
+        return response()->json($response);
     }
 
-    
 }

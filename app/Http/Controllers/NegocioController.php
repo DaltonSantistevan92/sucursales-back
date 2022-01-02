@@ -226,16 +226,19 @@ class NegocioController extends Controller{
     public function viewNegocioProducto($id){
 
         $response = [];
-        $negProd = Producto_Negocio::select('producto_id')->where('negocio_id', $id)->get();
+        $negProd = Producto_Negocio::select('producto_id', 'stock', 'stock_minimo', 'stock_maximo')->where('negocio_id', $id)->get();
 
         if($negProd->count() > 0){
             foreach($negProd as $p){
                 $p->producto->categoria;
+                $p['stock'] = $p->stock;
+                $p['stock_minimo'] = $p->stock_minimo;
+                $p['stock_maximo'] = $p->stock_maximo;
             }
         }
 
         return response()->json($negProd);
     }
 
-    
+
 }

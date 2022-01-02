@@ -11,19 +11,17 @@ use App\Models\Status;
 use App\Models\Detalle_Compra;
 
 
+class Compra extends Model{
 
-
-class Compra extends Model
-{
     use HasFactory;
 
-    protected $table ="compra";  
+    protected $table ="compra";
     protected $filleable = ['usuario_id','negocio_id','status_id','serie','subtotal','total','iva','fecha','estado'];
 
     public function usuario(){
         return $this->belongsTo(Usuario::class);
     }
-    
+
     public function negocio(){
         return $this->belongsTo(Negocio::class);
     }

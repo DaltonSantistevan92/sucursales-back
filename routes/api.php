@@ -82,6 +82,7 @@ Route::get('producto_negocio/{negocio_id}/{categoria_id}/{estado}',[Producto_Neg
 Route::post('compra',[CompraController::class, 'create']);
 Route::get('compra/cantidad/{negocio_id}/{year}/{month}', [CompraController::class, 'cantCompraEstado']);
 Route::get('compra/{negocio_id}/{status_id}/{year}/{month}', [CompraController::class, 'get']);
+Route::put('compra/confirmar', [CompraController::class, 'confirmarCompra']);
 
 //Ruta de Detalle_Compra
 Route::post('detallecompra',[Detalle_CompraController::class, 'create']);

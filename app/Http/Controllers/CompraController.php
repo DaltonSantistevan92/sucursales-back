@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Compra;
 use App\Models\Detalle_Compra;
+use App\Models\Producto_Negocio;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller{
@@ -93,6 +94,7 @@ class CompraController extends Controller{
 
                 $fecha = date("d/m/Y", strtotime($compras[$i]->fecha));
                 $compras[$i]['fecha'] = $fecha;
+                $compras[$i]->negocio;
             }
         }
 
@@ -134,6 +136,48 @@ class CompraController extends Controller{
             'confirmados' => $cantConf->count(),
             'todos' => $todos->count()
         ];
+
+        return response()->json($response);
+    }
+
+    public function confirmarCompra(Request $request){
+        $compraData = (object)$request->compra;
+        $compra = Compra::find($compraData->id);
+        $response = [];
+
+        if($compra){
+            if($compra->status_id == 1){    //Esta en pendiente
+                $compra->status_id = $compraData->status_id;
+                $compra->save();
+
+                $detalles = Detalle_Compra::where('compra_id', $compraData->id)->get();
+
+                //Aqui va code para el inventario
+                if($detalles->count() > 0){
+                    foreach($detalles as $d){
+                        $prodNeg = Producto_Negocio::where('negocio_id', $compra->negocio_id)->where('producto_id', $d->producto_id)->first();
+                        $prodNeg->stock = $prodNeg->stock + $d->cantidad;
+                        $prodNeg->save();
+                    }
+                }
+
+                $response = [
+                    'estado' => true,
+                    'mensaje' => 'La compra se ha confirmado !!',
+                    'detalles' => $detalles
+                ];
+            }else{
+                $response = [
+                    'estado' => false,
+                    'mensaje' => 'La compra no está pendiente !'
+                ];
+            }
+        }else{
+            $response = [
+                'estado' => false,
+                'mensaje' => 'La compra no existe'
+            ];
+        }
 
         return response()->json($response);
     }
