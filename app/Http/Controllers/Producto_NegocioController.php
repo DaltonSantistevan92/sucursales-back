@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Negocio;
+use App\Models\Producto;
 use App\Models\Producto_Negocio;
 
 
@@ -44,6 +45,30 @@ class Producto_NegocioController extends Controller{
             foreach($response as $a){
                 $a->producto->categoria;
             }
+        }
+        return response()->json($response);
+    }
+
+    public function getProductoById($producto_id){
+
+        $ProductoNegocio = Producto_Negocio::where('producto_id',$producto_id)->get();
+        $response = [];
+        
+        if($ProductoNegocio->count() > 0){
+            foreach($ProductoNegocio as $item){
+                $item->producto;
+            }
+            $response = [
+                'status' => true,
+                'mensaje' => 'existen datos',
+                'datos' => $ProductoNegocio
+            ];
+        }else{
+            $response = [
+                'status' => false,
+                'mensaje' => 'existen datos',
+                'datos' => $ProductoNegocio
+            ];
         }
         return response()->json($response);
     }

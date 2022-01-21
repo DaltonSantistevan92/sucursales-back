@@ -77,6 +77,8 @@ Route::put('producto/actualizar-estado', [ProductoController::class, 'updateStat
 
 //Ruta Producto_Negocio
 Route::get('producto_negocio/{negocio_id}/{categoria_id}/{estado}',[Producto_NegocioController::class, 'getProductoByNegocio']);
+Route::get('producto_negocio/{producto_id}',[Producto_NegocioController::class, 'getProductoById']);
+
 
 //Ruta de Compra
 Route::post('compra',[CompraController::class, 'create']);
