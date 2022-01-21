@@ -58,6 +58,7 @@ class CompraController extends Controller{
 
         return response()->json($response);
 
+
     }
 
     public function get($negocio_id, $status_id, $year, $month){
