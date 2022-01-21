@@ -240,5 +240,4 @@ class NegocioController extends Controller{
         return response()->json($negProd);
     }
 
-
 }
